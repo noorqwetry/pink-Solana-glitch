@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from federalpumpreserve.tech/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Apr 2025 21:32:06 GMT -->
+  <!-- Added by HTTrack --><meta
+    http-equiv="content-type"
+    content="text/html;charset=utf-8"
+  /><!-- /Added by HTTrack -->
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pink Solana Glitch</title>
+    <style>
+      @font-face {
+        font-family: "PixeloidSans";
+        src: url("PixeloidSans-mLxMm.ttf") format("truetype");
+      }
+
+      body {
+        background-color: #000;
+        color: #FFC0CB;
+        font-family: "PixeloidSans";
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+        line-height: 1.4;
+        overflow-x: hidden;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+      body.fade-in {
+        opacity: 1;
+      }
+
+      .screen {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 2px solid #ffffff;
+        box-shadow: 0 0 20px #FFC0CB;
+        position: relative;
+      }
+
+      .scanline {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(91, 243, 112, 0) 0%,
+          rgba(91, 243, 112, 0.1) 50%,
+          rgba(91, 243, 112, 0) 100%
+        );
+        animation: scanline 6s linear infinite;
+        pointer-events: none;
+        opacity: 0.2;
+      }
+
+      @keyframes scanline {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(100%);
+        }
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ffffff;
+        padding-bottom: 10px;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        color: #ffffff;
+        letter-spacing: 2px;
+        text-shadow: 0 0 5px #f6ff00;
+        margin: 0;
+      }
+
+      h2 {
+        font-size: 1.5em;
+        border-bottom: 1px dashed #ffffff;
+        padding-bottom: 5px;
+        margin-top: 30px;
+      }
+
+      p,
+      li {
+        font-size: 1em;
+        margin-bottom: 15px;
+      }
+
+      .blinking-cursor {
+        animation: blink 1s step-end infinite;
+        display: inline-block;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .command {
+        color: #ffffff;
+        margin-bottom: 5px;
+      }
+
+      .command::before {
+        content: "> ";
+      }
+
+      .response {
+        margin-left: 20px;
+        margin-bottom: 15px;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-between;
+        background-color: rgba(91, 243, 112, 0.1);
+        padding: 15px;
+        margin: 20px 0;
+        border: 1px dashed #ffffff;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #ffffff;
+      }
+
+      .button {
+        background-color: transparent;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .button:hover {
+        background-color: #ffffff;
+        color: #000;
+      }
+
+      .flicker {
+        animation: flicker 0.3s infinite alternate;
+      }
+
+      @keyframes flicker {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        25% {
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 0.9;
+        }
+        75% {
+          opacity: 0.7;
+        }
+      }
+
+      .footer {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 0.8em;
+        opacity: 0.7;
+        border-top: 1px solid #ffffff;
+        padding-top: 10px;
+      }
+
+      /* CRT effect */
+      .crt-effect {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.2) 100%
+        );
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .calculate-button {
+        font-family: "PixeloidSans", sans-serif; /* Ensure the button uses the custom font */
+        background-color: #00a6ff; /* Bright yellow background for visibility */
+        color: #000; /* Black text for contrast */
+        padding: 10px 20px;
+        border-radius: 5px; /* Slightly rounded edges for a modern touch */
+        border: none; /* No border for a cleaner look */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
+        transition: transform 0.2s ease-in-out; /* Smooth transform on click */
+      }
+
+      .calculate-button:hover {
+        transform: scale(1.05); /* Slight increase in size on hover */
+        cursor: pointer; /* Cursor indication for clickable element */
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.7); /* Increased shadow on hover for emphasis */
+      }
+
+      .calculate-button:active {
+        transform: scale(0.95); /* Slight decrease when clicked */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="crt-effect"></div>
+
+    <div class="screen">
+      <div class="scanline"></div>
+
+      <div class="header">
+        <h1>Pink Solana Glitch</h1>
+        <p>
+          $PSG TOKEN ON SOLANA BLOCKCHAIN<span class="blinking-cursor">█</span>
+        </p>
+        <p class="flicker">SYSTEM ONLINE: CONNECTED TO SOLANA MAINNET</p>
+      </div>
+
+      <div class="command">DISPLAY TOKEN INFO</div>
+      <div class="response">
+        -TOKEN NAME: Pink Solana Glitch<br />
+        -TOKEN SYMBOL: $PSG<br />
+        -BLOCKCHAIN: SOLANA<br />
+        -CONTRACT ADDRESS:
+        <span style="color: white"
+          >AVgJiio4KVdzcR2iPw1AtdSttLQgpaj4rkZtv9Y5Mykb</span
+        ><br />
+        -TOTAL SUPPLY: 1,000,000,000 
+      </div>
+
+      <h2>INVESTMENT PARAMETERS</h2>
+      <div class="stats">
+        <div class="stat-item">
+          <div>TAX</div>
+          <div class="stat-value">10.00%</div>
+        </div>
+        <div class="stat-item">
+          <div>CURRENT PRICE</div>
+          <div class="stat-value" id="current-price">$-</div>
+        </div>
+
+        <div class="stat-item">
+          <div>MARKET CAP</div>
+          <div class="stat-value" id="market-cap">$-</div>
+        </div>
+
+        <div class="stat-item">
+          <div>HOLDERS</div>
+          <div class="stat-value" id="holder-count">-</div>
+        </div>
+      </div>
+
+      <h2>$FPR TECHNOLOGY ARCHITECTURE</h2>
+      <div class="command">ABOUT $FPR</div>
+      <div class="response">
+        -Pink Solana glitch is the ultimate Solana-based memecoin with a
+        mission to pump, reward, and create chaos. Every buy and sell comes with
+        a 10% tax — 5% goes to holders every 5 minutes, and 5% fuels random
+        buybacks that hit the chart at unexpected times, injecting FOMO straight
+        into the veins of the market. No mercy. Just pumps.
+      </div>
+
+      <h2>TOKENOMICS BREAKDOWN</h2>
+      <div class="command">ACCESS tokenomics.dat</div>
+      <div class="response">
+        - 95% CIRCULATING SUPPLY IN LIQUIDITY<br />
+        - EVERY 5MINS REWARDS ARE SENT<br />
+        - 10% TAX ON EVERY TRANSACTION<br />
+        - 5% REWARDS – AUTO-DISTRIBUTED TO HOLDERS EVERY 5 MINUTES<br />
+        - 5% BUYBACK – USED FOR RANDOM CHART BUYBACKS TO CREATE FOMO<br />
+      </div>
+
+      <!-- <h2>REWARD CALCULATOR</h2> -->
+      <!-- <div class="command">CALCULATE YOUR REWARDS</div> -->
+      <!-- <div class="response">
+        <form id="reward-calculator" onsubmit="calculateRewards(event)">
+          <label for="volume">Enter the 24-hour trading volume (USD):</label
+          ><br />
+          <input type="number" id="volume" required min="0" step="0.01" /><br />
+          <label for="holdings">Enter your $FPR holdings:</label><br />
+          <input
+            type="number"
+            id="holdings"
+            required
+            min="0"
+            step="0.01"
+          /><br />
+          <button type="submit" class="button calculate-button">
+            CALCULATE
+          </button>
+        </form>
+        <div id="reward-results" style="margin-top: 20px"></div>
+      </div> -->
+
+      <h2>HOW TO ACQUIRE $PSG</h2>
+      <div class="command">LIST acquisition.methods</div>
+      <div class="response">
+        -BUY <span style="color: white">$PSG</span> WITH YOUR FAVOURITE BOT<br />
+
+        -HOLD FOR AUTOMATIC SOL REWARDS.
+      </div>
+
+      <div style="text-align: center; margin-top: 30px">
+        <a href="https://x.com/FederalPump" class="button">TWITTER</a>
+        <a href="https://t.me/FederalPump" class="button">TELEGRAM</a>
+        <a href="#" class="button">BUY $FPR</a>
+        <a href="https://x.com/FederalPump" class="button">JOIN COMMUNITY</a>
+      </div>
+
+      <h2>ROADMAP - 2025</h2>
+      <div class="command">ACCESS roadmap.future</div>
+      <div class="response"></div>
+
+      <div class="footer">
+        COPYRIGHT © 2025 FEDERAL PUMP RESERVE $PSG<br />
+        <br />
+      </div>
+    </div>
+
+    <script>
+      function calculateRewards(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Constants
+        const percentageOfVolume = 0.1;
+        const scaleFactor = 0.5;
+        const holdingsScale = 1e9;
+        const DOGEConversionRate = 1.26;
+
+        // Get user inputs
+        const volume = parseFloat(document.getElementById("volume").value);
+        const holdings = parseFloat(document.getElementById("holdings").value);
+
+        // Calculations
+        const dailyEarnings =
+          percentageOfVolume *
+          volume *
+          (holdings / holdingsScale) *
+          scaleFactor;
+        const DOGEDaily = dailyEarnings / DOGEConversionRate;
+
+        // Display results
+        const resultsDiv = document.getElementById("reward-results");
+        resultsDiv.innerHTML = `<strong>Calculation Results:</strong><br>Your Daily Earnings: $${dailyEarnings.toFixed(
+          2
+        )} (≈ ${DOGEDaily.toFixed(4)} DOGE)`;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.classList.add("fade-in"); // Apply fade-in effect when the page loads
+      });
+      // Add some terminal typing effect
+      document.addEventListener("DOMContentLoaded", function () {
+        const commandElements = document.querySelectorAll(".command");
+
+        commandElements.forEach(function (element, index) {
+          setTimeout(function () {
+            typeText(element, element.innerHTML, 0);
+            element.innerHTML = "";
+          }, index * 1000);
+        });
+
+        function typeText(element, text, index) {
+          if (index < text.length) {
+            element.innerHTML += text.charAt(index);
+            setTimeout(function () {
+              typeText(element, text, index + 1);
+            }, 20 + Math.random() * 30);
+          }
+        }
+
+        // Add occasional "glitch" effect
+        setInterval(function () {
+          const elements = document.querySelectorAll("h1, h2, .stat-value");
+          const randomElement =
+            elements[Math.floor(Math.random() * elements.length)];
+          randomElement.classList.add("flicker");
+
+          setTimeout(function () {
+            randomElement.classList.remove("flicker");
+          }, 300);
+        }, 5000);
+      });
+
+      const tokenAddress = "AVgJiio4KVdzcR2iPw1AtdSttLQgpaj4rkZtv9Y5Mykb"; // Replace with actual token address
+      const dexScreenerApi = `https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`;
+      const heliusApi =
+        "https://mainnet.helius-rpc.com/?api-key=3007192b-d80d-4da7-b869-f080e3fa138d"; // Replace with your actual Helius API key
+
+      async function fetchMarketData() {
+        try {
+          const response = await fetch(dexScreenerApi);
+          if (!response.ok)
+            throw new Error(`HTTP error! Status: ${response.status}`);
+
+          const data = await response.json();
+          if (data.pairs && data.pairs.length > 0) {
+            let marketCap = data.pairs[0].fdv || "Unavailable";
+            let price = data.pairs[0].priceUsd || "Unavailable";
+
+            document.getElementById(
+              "market-cap"
+            ).innerHTML = `$${marketCap.toLocaleString()}`;
+            document.getElementById("current-price").innerHTML = `$${parseFloat(
+              price
+            ).toFixed(6)}`;
+          } else {
+            document.getElementById("market-cap").innerHTML = "Not Found";
+            document.getElementById("current-price").innerHTML = "Not Found";
+          }
+        } catch (error) {
+          console.error("Error fetching market data:", error);
+          document.getElementById("market-cap").innerHTML = "Error";
+          document.getElementById("current-price").innerHTML = "Error";
+        }
+      }
+
+      async function fetchHolderCount() {
+        try {
+          const response = await fetch(heliusApi, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              jsonrpc: "2.0",
+              id: "helius-test",
+              method: "getTokenAccounts",
+              params: { limit: 1000, mint: tokenAddress },
+            }),
+          });
+
+          const data = await response.json();
+          if (data.result && data.result.token_accounts) {
+            let uniqueHolders = new Set(
+              data.result.token_accounts.map((account) => account.owner)
+            );
+            document.getElementById("holder-count").innerHTML =
+              uniqueHolders.size.toLocaleString();
+          } else {
+            document.getElementById("holder-count").innerHTML = "Unavailable";
+          }
+        } catch (error) {
+          console.error("Error fetching holder count:", error);
+          document.getElementById("holder-count").innerHTML = "Error";
+        }
+      }
+
+      function updateTokenStats() {
+        fetchMarketData();
+        fetchHolderCount();
+      }
+
+      // Run function when page loads & update every 20 seconds
+      document.addEventListener("DOMContentLoaded", () => {
+        updateTokenStats();
+        setInterval(updateTokenStats, 20000);
+      });
+    </script>
+  </body>
+
+  <!-- Mirrored from federalpumpreserve.tech/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Apr 2025 21:32:06 GMT -->
+</html>
